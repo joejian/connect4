@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html>
@@ -35,6 +34,19 @@
 							if (msg.length > 0)
 								$('[name=conversation]').val(conversation + "\n" + otherUser + ": " + msg);
 						}
+					});
+					
+					$.getJSON('<?= base_url() ?>board/getBoard', function (data, text, jqXHR){
+						if (data && data.status=='success'){
+							var board = data.board;
+							$('[name=conversation]').val(board);
+							//alert(board);
+						} else {
+						$('[name=conversation]').val("dog");
+							//alert("bad");
+						}
+						
+						//if (data && data.status
 					});
 			});
 
