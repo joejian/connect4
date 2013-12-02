@@ -155,8 +155,8 @@ class Account extends CI_Controller {
 	    		else
 	    		{
 			    $vals = array(
-				'img_path' => $_SERVER['DOCUMENT_ROOT'] . 'application/images/',
-				'img_url' => 'http://localhost:31100/application/images/',
+				'img_path' => $_SERVER['DOCUMENT_ROOT'] . '/captcha/',
+				'img_url' => 'http://localhost:31100/captcha/',
 				'img_width' => '150',
 				'img_height' => '30'
 				);
