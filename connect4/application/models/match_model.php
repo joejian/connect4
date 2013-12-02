@@ -44,8 +44,12 @@ class Match_model extends CI_Model {
 	
 	//need some work
 	function getBoard($id) {
-		$this->db->where('id',$id);
-		return null;
+		$sql = "select board_state from `match` where id=?";
+		$query = $this->db->query($sql, array($id));
+		if ($query && $query->num_rows() > 0)		
+		      return $query->row(0);
+		else
+		      return null;
 	}
 }
 ?>
