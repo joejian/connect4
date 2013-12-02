@@ -139,5 +139,57 @@ class Board extends CI_Controller {
 		echo json_encode(array('status'=>'failure','message'=>$errormsg));
  	}
  	
+ 	function getBoard(){
+		$this->load->model('user_model');
+ 		$this->load->model('match_model');
+ 			
+ 		$user = $_SESSION['user'];
+ 		 
+ 		$user = $this->user_model->get($user->login);
+ 		if ($user->user_status_id != User::PLAYING) {	
+ 			$errormsg="Not in PLAYING state";
+ 			goto error;
+ 		}
+ 		// start transactional mode  
+ 		$this->db->trans_begin();
+ 		
+ 		$match = $this->match_model->getExclusive($user->match_id);
+ 		
+ 		//CODE
+ 		$board = unserialize($match->board_state));
+ 		/*$shit = serialize(array(1, 0, array(
+						  array(1,0,0,0,0,0),
+						  array(2,0,0,0,0,0),
+						  array(3,0,0,0,0,0),
+						  array(4,0,0,0,0,0),
+						  array(5,0,0,0,0,0),
+						  array(6,0,0,0,0,0),
+						  array(7,0,0,0,0,0)
+						  )));
+		$board = unserialize($shit);*/
+ 		//$board = $match->user1_id;
+ 		
+ 		if ($this->db->trans_status() === FALSE) {
+ 			$errormsg = "Transaction error";
+ 			goto transactionerror;
+ 		}
+ 		
+ 		// if all went well commit changes
+ 		$this->db->trans_commit();
+ 		
+ 		//echo json_encode(array('status'=>'success', 'board'=>array(0 , 1 ,2))); 
+ 		echo json_encode(array('status'=>'success', 'board'=>$board)); 
+		return;
+		
+		transactionerror:
+		$this->db->trans_rollback();
+		
+		error:
+		echo json_encode(array('status'=>'failure'));
+ 		
+ 		return;
+ 		
+	}
+ 	
  }
 
