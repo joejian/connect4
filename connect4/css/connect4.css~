@@ -1,0 +1,5 @@
+ 
+BODY{background-color: white}
+IMG {border: 0}
+A:visited {color: blue}
+tr {height: 60px; width: 50px}

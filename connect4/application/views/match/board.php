@@ -5,6 +5,7 @@
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="<?= base_url() ?>/js/jquery.timers.js"></script>
 	<script src="<?= base_url() ?>/js/connect4.js"></script>
+	<link href="<?php echo base_url();?>css/connect4.css" rel="stylesheet" type="text/css" />
 	<script>
 
 		var otherUser = "<?= $otherUser->login ?>";
@@ -12,7 +13,11 @@
 		var status = "<?= $status ?>";
 		
 		var turn;
-		var pastrow;
+		var pastrow = 1;
+		
+		var redPlayer = "<?= $otherUser->login ?>";
+		var blackPlayer = "<?= $user->login ?>";
+		var whosFirst = "<?= $otherUser->login ?>";
 		
 		$(function(){
 			$('body').everyTime(500,function(){
@@ -25,7 +30,12 @@
 								if (data && data.status=='accepted') {
 									status = 'playing';
 									$('#status').html('Playing ' + otherUser);
-									postRow('-1');
+									var burl = "<?= base_url() ?>board/postBoard";
+									$.post(burl, { 'player': user, 'row': '-1' });
+									redPlayer = "<?= $user->login ?>";
+									blackPlayer = "<?= $otherUser->login ?>";
+									whosFirst = "<?= $user->login ?>";
+									document.formo.texter.value = redPlayer + "'s turn.";
 								}
 								
 						});
@@ -45,8 +55,8 @@
 							var board = data.board;
 							//$('[name=conversation]').val(board);
 							//alert(board);
-							var conversation = $('[name=conversation]').val();
-							$('[name=conversation]').val(conversation + "\n" +  "Client: " + board);
+							//var conversation = $('[name=conversation]').val();
+							//$('[name=conversation]').val(conversation + "\n" +  "Client: " + board);
 							turn = board[1];
 							test(parseInt(board[0]), board[1]);
 						} else {
@@ -71,44 +81,6 @@
 				});
 				
 		});
-	
-		var redPlayer = "<?= $user->login ?>";
-		var blackPlayer = "<?= $otherUser->login ?>";
-		var whosFirst = "<?= $user->login ?>";
-		
-		var placeLoc;
-		function dropIt(whichRow) {
-		    if (turn == user) {
-			turn = otherUser;
-			if (gameActive == 1) {
-			    placeLoc = (7 - vals[whichRow]) * 7 -7 + whichRow;
-			    if (vals[whichRow] < 6) {
-				postRow(whichRow);
-				document.images[placeLoc].src = whosTurnSpot.src;
-				vals[whichRow] = vals[whichRow] + 1;
-				checkForWinner(whosTurn);
-				switchTurns();
-				placeTop(whichRow);
-			    }
-			}
-		    }
-		}
-		
-		function updateIt(whichRow) {
-		    if (turn == user) {
-			turn = otherUser;
-			if (gameActive == 1) {
-			    placeLoc = (7 - vals[whichRow]) * 7 -7 + whichRow;
-			    if (vals[whichRow] < 6) {
-				document.images[placeLoc].src = whosTurnSpot.src;
-				vals[whichRow] = vals[whichRow] + 1;
-				checkForWinner(whosTurn);
-				switchTurns();
-				placeTop(whichRow);
-			    }
-			}
-		    }
-		}
 		
 		function test(r, p) {
 		    if (r != -1 && p == user) {
@@ -120,6 +92,7 @@
 		}
 		
 		function postRow(r) {
+		    while(pastrow == 0) {}
 			var burl = "<?= base_url() ?>board/postBoard";
 			$.post(burl, { 'player': otherUser, 'row': r });
 		}
@@ -131,14 +104,20 @@
 		redChecker.src = "<?= base_url() ?>assets/redchecker.gif";
 		blackChecker.src = "<?= base_url() ?>assets/blackchecker.gif";
 		
+		
+		function postWinner(c) {
+		    var s;
+		    if (c == 'red') {
+			s = 2;
+		    } else {
+			s = 3;
+		    }
+		    var surl = "<?= base_url() ?>board/postStatus";
+		    $.post(surl, { 'status' : s });
+		}
+		
 	</script>
-	
-	<STYLE TYPE="text/css">
-	BODY{background-color: white}
-	IMG {border: 0}
-	A:visited {color: blue}
-	tr {height: 60px; width: 50px}
-	</STYLE>
+
 	
 	</head> 
 	

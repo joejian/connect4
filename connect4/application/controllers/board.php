@@ -223,5 +223,33 @@ class Board extends CI_Controller {
  		
 	}
  	
+ 	function postStatus() {
+		$this->load->model('user_model');
+		$this->load->model('match_model');
+
+		$user = $_SESSION['user'];
+		    
+		$user = $this->user_model->getExclusive($user->login);
+		if ($user->user_status_id != User::PLAYING) {	
+			$errormsg="Not in PLAYING state";
+			goto error;
+		}
+		
+		$match = $this->match_model->get($user->match_id);			
+		
+		$status = $this->input->post('status');
+		
+		$this->match_model->updateStatus($match->id, $status);
+	
+		echo json_encode(array('status'=>'success'));
+		    
+		return;
+		
+ 		$errormsg="Missing argument";
+ 		
+		error:
+			echo json_encode(array('status'=>'failure','message'=>$errormsg));
+ 	}
+ 	
  }
 
