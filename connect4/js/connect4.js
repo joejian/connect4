@@ -56,6 +56,7 @@ function dropIt(whichRow) {
     if (gameActive == 1) {
 	placeLoc = (7 - vals[whichRow]) * 7 -7 + whichRow;
 	if (vals[whichRow] < 6) {
+	    postRow(whichRow);
 	    document.images[placeLoc].src = whosTurnSpot.src;
 	    vals[whichRow] = vals[whichRow] + 1;
 	    checkForWinner(whosTurn);

@@ -14,7 +14,7 @@
 		$(function(){
 			$('body').everyTime(2000,function(){
 					if (status == 'waiting') {
-						$.getJSON('<?= base_url() ?>arcade/checkInvitation',function(data, text, jqZHR){
+						$.getJSON('<?= base_url() ?>arcade/checkInvitation',function(data, text, jqXHR){
 								if (data && data.status=='rejected') {
 									alert("Sorry, your invitation to play was declined!");
 									window.location.href = '<?= base_url() ?>arcade/index';

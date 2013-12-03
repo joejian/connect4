@@ -25,8 +25,5 @@ class Match  {
 	//Self::ACTIVE mean $this->ACTIVE, but since there is no instance of this class, we use self
 	public $match_status_id = self::ACTIVE;
 	
-	//Testing
-	public $player;
-	public $row;
 	
 }

@@ -156,8 +156,6 @@ class Board extends CI_Controller {
 		$row = $this->input->post('row');
 		$player = $this->input->post('player');
 		
-		$board['row'] = $row;
-		//$board['turn'] = $turn; 
 		$data = serialize(array ( $row, $player ));
 		
 		$this->match_model->updateBoard($match->id, $data);
@@ -201,6 +199,7 @@ class Board extends CI_Controller {
 						  )));
 		$board = unserialize($shit);*/
  		$board = unserialize($match->board_state);
+ 		//$board = $match->board_state;
  		
  		if ($this->db->trans_status() === FALSE) {
  			$errormsg = "Transaction error";
