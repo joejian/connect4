@@ -19,7 +19,7 @@ var emptySpot = new Image();
 var emptyChecker = new Image();
 var redChecker = new Image();
 var blackChecker = new Image();
-
+var userSwitched = true;
 
 
 var whosTurn = "red";
@@ -48,8 +48,8 @@ function unPlaceTop(picToUnplace) {
 
 var placeLoc;
 function dropIt(whichRow) {
-    if (turn == user) {
-	turn = otherUser;
+    if (turn == user && userSwitched == true) {
+	userSwitched = false;
 	if (gameActive == 1) {
 	    placeLoc = (7 - vals[whichRow]) * 7 -7 + whichRow;
 	    if (vals[whichRow] < 6) {
@@ -65,8 +65,8 @@ function dropIt(whichRow) {
 }
 
 function updateIt(whichRow) {
+    userSwitched = true;
     if (turn == user) {
-	turn = otherUser;
 	if (gameActive == 1) {
 	    placeLoc = (7 - vals[whichRow]) * 7 -7 + whichRow;
 	    if (vals[whichRow] < 6) {

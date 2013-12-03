@@ -13,7 +13,6 @@
 		var status = "<?= $status ?>";
 		
 		var turn;
-		var pastrow = 1;
 		
 		var redPlayer = "<?= $otherUser->login ?>";
 		var blackPlayer = "<?= $user->login ?>";
@@ -55,10 +54,10 @@
 							var board = data.board;
 							//$('[name=conversation]').val(board);
 							//alert(board);
-							//var conversation = $('[name=conversation]').val();
-							//$('[name=conversation]').val(conversation + "\n" +  "Client: " + board);
+							var conversation = $('[name=conversation]').val();
+							$('[name=conversation]').val(conversation + "\n" +  "Client: " + board);
 							turn = board[1];
-							test(parseInt(board[0]), board[1]);
+							    test(parseInt(board[0]), board[1]);
 						} else {
 						//$('[name=conversation]').val("dog");
 							//alert("bad");
@@ -92,7 +91,7 @@
 		}
 		
 		function postRow(r) {
-		    while(pastrow == 0) {}
+			next = otherUser;
 			var burl = "<?= base_url() ?>board/postBoard";
 			$.post(burl, { 'player': otherUser, 'row': r });
 		}
