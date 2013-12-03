@@ -36,7 +36,5 @@ moves beyond the last.
 Notable Bugs:
 Captcha does not show up unless the files are placed correctly.
 
-Unwanted behaviour is refreshing during a game since board is not saved
+Unwanted behaviour when refreshing during a game since board is not saved
 in board_state of the match database.
-
-Move don't always work correctly.
