@@ -20,8 +20,8 @@ var emptyChecker = new Image();
 var redChecker = new Image();
 var blackChecker = new Image();
 
-redSpot.src = "http://localhost:31100/fillred.gif";
-blackSpot.src = "http://localhost:31100/fillblack.gif";
+redSpot.src = "<?= base_url() ?>fillred.gif";
+blackSpot.src = "<?= base_url() ?>fillblack.gif";
 emptySpot.src = "http://localhost:31100/fillempty.gif";
 emptyChecker.src = "http://localhost:31100/clearness.gif";
 redChecker.src = "http://localhost:31100/redchecker.gif";

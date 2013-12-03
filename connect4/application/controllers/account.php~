@@ -86,8 +86,8 @@ class Account extends CI_Controller {
 
     function newForm() {
 		$vals = array(
-		    'img_path' => $_SERVER['DOCUMENT_ROOT'] . '/captcha/',
-		    'img_url' => 'http://localhost:31100/captcha/',
+		    'img_path' => $_SERVER['DOCUMENT_ROOT'] . '/connect4/images/',
+		    'img_url' => base_url().'images/',
 		    'img_width' => '150',
 		    'img_height' => '30'
 		    );
@@ -124,8 +124,8 @@ class Account extends CI_Controller {
 	    	if ($this->form_validation->run() == FALSE) 
 	    	{
 		    $vals = array(
-			'img_path' => $_SERVER['DOCUMENT_ROOT'] . '/captcha/',
-			'img_url' => 'http://localhost:31100/captcha/',
+		    'img_path' => $_SERVER['DOCUMENT_ROOT'] . '/connect4/images/',
+		    'img_url' => base_url().'images/',
 			'img_width' => '150',
 			'img_height' => '30'
 			);
@@ -168,8 +168,8 @@ class Account extends CI_Controller {
 	    		else
 	    		{
 			    $vals = array(
-				'img_path' => $_SERVER['DOCUMENT_ROOT'] . '/captcha/',
-				'img_url' => 'http://localhost:31100/captcha/',
+		    'img_path' => $_SERVER['DOCUMENT_ROOT'] . '/connect4/images/',
+		    'img_url' => base_url().'images/',
 				'img_width' => '150',
 				'img_height' => '30'
 				);

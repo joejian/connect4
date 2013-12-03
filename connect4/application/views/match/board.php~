@@ -75,6 +75,13 @@
 			$.post(burl, { 'player': 1, 'row': r });
 		}
 		
+		redSpot.src = "<?= base_url() ?>images/fillred.gif";
+		blackSpot.src = "<?= base_url() ?>images/fillblack.gif";
+		emptySpot.src = "<?= base_url() ?>images/fillempty.gif";
+		emptyChecker.src = "<?= base_url() ?>images/clearness.gif";
+		redChecker.src = "<?= base_url() ?>images/redchecker.gif";
+		blackChecker.src = "<?= base_url() ?>images/blackchecker.gif";
+		
 	</script>
 	
 	<STYLE TYPE="text/css">
