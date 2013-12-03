@@ -75,12 +75,12 @@
 			$.post(burl, { 'player': 1, 'row': r });
 		}
 		
-		redSpot.src = "<?= base_url() ?>images/fillred.gif";
-		blackSpot.src = "<?= base_url() ?>images/fillblack.gif";
-		emptySpot.src = "<?= base_url() ?>images/fillempty.gif";
-		emptyChecker.src = "<?= base_url() ?>images/clearness.gif";
-		redChecker.src = "<?= base_url() ?>images/redchecker.gif";
-		blackChecker.src = "<?= base_url() ?>images/blackchecker.gif";
+		redSpot.src = "<?= base_url() ?>assets/fillred.gif";
+		blackSpot.src = "<?= base_url() ?>assets/fillblack.gif";
+		emptySpot.src = "<?= base_url() ?>assets/fillempty.gif";
+		emptyChecker.src = "<?= base_url() ?>assets/clearness.gif";
+		redChecker.src = "<?= base_url() ?>assets/redchecker.gif";
+		blackChecker.src = "<?= base_url() ?>assets/blackchecker.gif";
 		
 	</script>
 	
