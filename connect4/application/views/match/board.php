@@ -11,6 +11,9 @@
 		var user = "<?= $user->login ?>";
 		var status = "<?= $status ?>";
 		
+		var turn;
+		var pastrow;
+		
 		$(function(){
 			$('body').everyTime(2000,function(){
 					if (status == 'waiting') {
@@ -22,6 +25,7 @@
 								if (data && data.status=='accepted') {
 									status = 'playing';
 									$('#status').html('Playing ' + otherUser);
+									postRow('-1');
 								}
 								
 						});
@@ -43,6 +47,8 @@
 							//alert(board);
 							var conversation = $('[name=conversation]').val();
 							$('[name=conversation]').val(conversation + "\n" +  "Client: " + board);
+							turn = board[1];
+							test(parseInt(board[0]));
 						} else {
 						//$('[name=conversation]').val("dog");
 							//alert("bad");
@@ -70,9 +76,35 @@
 		var blackPlayer = "<?= $otherUser->login ?>";
 		var whosFirst = "<?= $user->login ?>";
 		
+		var placeLoc;
+		function dropIt(whichRow) {
+		    if (turn == user) {
+			if (gameActive == 1) {
+			    placeLoc = (7 - vals[whichRow]) * 7 -7 + whichRow;
+			    if (vals[whichRow] < 6) {
+				postRow(whichRow);
+				document.images[placeLoc].src = whosTurnSpot.src;
+				vals[whichRow] = vals[whichRow] + 1;
+				checkForWinner(whosTurn);
+				switchTurns();
+				placeTop(whichRow);
+			    }
+			}
+		    }
+		}
+		
+		function test(r) {
+		    if (r != -1) {
+			dropIt(r);
+			var burl = "<?= base_url() ?>board/postBoard";
+			$.post(burl, { 'player': user, 'row': '-1' });
+		    }
+
+		}
+		
 		function postRow(r) {
 			var burl = "<?= base_url() ?>board/postBoard";
-			$.post(burl, { 'player': 1, 'row': r });
+			$.post(burl, { 'player': otherUser, 'row': r });
 		}
 		
 		redSpot.src = "<?= base_url() ?>assets/fillred.gif";
