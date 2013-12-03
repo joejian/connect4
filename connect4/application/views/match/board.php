@@ -15,7 +15,7 @@
 		var pastrow;
 		
 		$(function(){
-			$('body').everyTime(2000,function(){
+			$('body').everyTime(500,function(){
 					if (status == 'waiting') {
 						$.getJSON('<?= base_url() ?>arcade/checkInvitation',function(data, text, jqXHR){
 								if (data && data.status=='rejected') {
@@ -48,7 +48,7 @@
 							var conversation = $('[name=conversation]').val();
 							$('[name=conversation]').val(conversation + "\n" +  "Client: " + board);
 							turn = board[1];
-							test(parseInt(board[0]));
+							test(parseInt(board[0]), board[1]);
 						} else {
 						//$('[name=conversation]').val("dog");
 							//alert("bad");
@@ -79,6 +79,7 @@
 		var placeLoc;
 		function dropIt(whichRow) {
 		    if (turn == user) {
+			turn = otherUser;
 			if (gameActive == 1) {
 			    placeLoc = (7 - vals[whichRow]) * 7 -7 + whichRow;
 			    if (vals[whichRow] < 6) {
@@ -93,8 +94,8 @@
 		    }
 		}
 		
-		function test(r) {
-		    if (r != -1) {
+		function test(r, p) {
+		    if (r != -1 && p == user) {
 			dropIt(r);
 			var burl = "<?= base_url() ?>board/postBoard";
 			$.post(burl, { 'player': user, 'row': '-1' });
