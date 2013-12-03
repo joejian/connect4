@@ -39,10 +39,12 @@
 					$.getJSON('<?= base_url() ?>board/getBoard', function (data, text, jqXHR){
 						if (data && data.status=='success'){
 							var board = data.board;
-							$('[name=conversation]').val(board);
+							//$('[name=conversation]').val(board);
 							//alert(board);
+							var conversation = $('[name=conversation]').val();
+							$('[name=conversation]').val(conversation + "\n" +  "Client: " + board);
 						} else {
-						$('[name=conversation]').val("dog");
+						//$('[name=conversation]').val("dog");
 							//alert("bad");
 						}
 						
@@ -59,13 +61,20 @@
 						$('[name=conversation]').val(conversation + "\n" + user + ": " + msg);
 						});
 				return false;
-				});	
+
+				});
+				
 		});
 	
 		var redPlayer = "<?= $user->login ?>";
 		var blackPlayer = "<?= $otherUser->login ?>";
 		var whosFirst = "<?= $user->login ?>";
-	
+		
+		function postRow(r) {
+			var burl = "<?= base_url() ?>board/postBoard";
+			$.post(burl, { 'player': 1, 'row': r });
+		}
+		
 	</script>
 	
 	<STYLE TYPE="text/css">

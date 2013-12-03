@@ -19,11 +19,13 @@
 		Print "<th>Last Name:</th> <td>".$info->last . " </td>";
 		Print "<th>Email:</th> <td>".$info->email . " </td>";
 		//Print "<th>Salt:</th> <td>".$info->salt . " </td>";
+		Print "</tr>";
 	    }
 	    Print "</table>";
 
 	?>
 	<div>
+	    <a href="<?php echo site_url('account/deleteAccounts') ?>">Delete All</a>
 	    <a href="<?php echo site_url('account/loginForm') ?>">Back</a>
 	</div>
 

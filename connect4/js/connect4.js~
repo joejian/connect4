@@ -54,6 +54,7 @@ function unPlaceTop(picToUnplace) {
 var placeLoc;
 function dropIt(whichRow) {
     if (gameActive == 1) {
+	postRow(whichRow);
 	placeLoc = (7 - vals[whichRow]) * 7 -7 + whichRow;
 	if (vals[whichRow] < 6) {
 	    document.images[placeLoc].src = whosTurnSpot.src;

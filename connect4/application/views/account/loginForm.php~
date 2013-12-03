@@ -37,6 +37,8 @@
 ?>	
 
 	<a href="<?php echo site_url('account/showAccounts') ?>">Account Information</a>
+	<br>
+	<a href="<?php echo site_url('account/showBoards') ?>">Board Information</a>
 </body>
 
 </html>

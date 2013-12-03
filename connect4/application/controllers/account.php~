@@ -26,6 +26,19 @@ class Account extends CI_Controller {
 	$this->load->view('accounts', $data);
     }
     
+    //TEMPORARY
+    function showBoards() {
+	$temp = $this->db->query("SELECT * FROM `match`;");
+	$data['matchs'] = $temp;
+	$this->load->view('boards', $data);
+    }
+    
+    //TEMPORARY
+    
+    function deleteAccounts() {
+	$this->db->query("delete from user;");
+    }
+    
     function loginForm() {
     		$this->load->view('account/loginForm');
     }
