@@ -15,7 +15,7 @@
 		var pastrow;
 		
 		$(function(){
-			$('body').everyTime(1000,function(){
+			$('body').everyTime(500,function(){
 					if (status == 'waiting') {
 						$.getJSON('<?= base_url() ?>arcade/checkInvitation',function(data, text, jqXHR){
 								if (data && data.status=='rejected') {
@@ -94,9 +94,25 @@
 		    }
 		}
 		
+		function updateIt(whichRow) {
+		    if (turn == user) {
+			turn = otherUser;
+			if (gameActive == 1) {
+			    placeLoc = (7 - vals[whichRow]) * 7 -7 + whichRow;
+			    if (vals[whichRow] < 6) {
+				document.images[placeLoc].src = whosTurnSpot.src;
+				vals[whichRow] = vals[whichRow] + 1;
+				checkForWinner(whosTurn);
+				switchTurns();
+				placeTop(whichRow);
+			    }
+			}
+		    }
+		}
+		
 		function test(r, p) {
 		    if (r != -1 && p == user) {
-			dropIt(r);
+			updateIt(r);
 			var burl = "<?= base_url() ?>board/postBoard";
 			$.post(burl, { 'player': user, 'row': '-1' });
 		    }
