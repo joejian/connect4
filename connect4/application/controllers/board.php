@@ -188,7 +188,7 @@ class Board extends CI_Controller {
  		
  		//CODE
  		//$board = unserialize($match->board_state));
- 		/*$shit = serialize(array(1, 0, array(
+ 		/*$test = serialize(array(1, 0, array(
 						  array(1,0,0,0,0,0),
 						  array(2,0,0,0,0,0),
 						  array(3,0,0,0,0,0),
